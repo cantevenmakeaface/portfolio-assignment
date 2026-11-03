@@ -1,33 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Admin Override Portal</title>
+  <style>
+    /* Quick terminal style to make it look authentic */
+    body { background-color: #0d1117; color: #58a6ff; font-family: monospace; padding: 50px; }
+    .content-box { border: 1px solid #30363d; padding: 20px; border-radius: 6px; background-color: #161b22; max-width: 500px; margin: 0 auto; }
+    h1 { color: #f0f6fc; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
+    .status-box { background: #21262d; padding: 10px; border-radius: 4px; text-align: center; font-weight: bold; margin-bottom: 20px; color: #f85149; }
+    .form-input { width: 90%; padding: 10px; background: #0d1117; border: 1px solid #30363d; color: #fff; margin-bottom: 15px; font-family: monospace; }
+    .submit-button { background: #238636; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 4px; font-weight: bold;}
+    .submit-button:hover { background: #2ea043; }
+  </style>
+</head>
+<body>
+
   <main class="page-container">
     <section class="content-box">
-      <h1 class="page-title">Secure Portal v1.0</h1>
-      <p class="page-text">Only administrators with the valid override key can bypass this gateway.</p>
+      <h1 class="page-title">Secure Portal v2.4</h1>
+      <p class="page-text">System warning: All authorization attempts are locally validated and monitored by the client runtime framework.</p>
 
       <div class="puzzle-area">
-        <div id="status-light" style="color: red; font-weight: bold;">[ STATUS: LOCKED ]</div>
+        <div id="status-light" class="status-box">[ STATUS: ACCESS_DENIED ]</div>
       </div>
 
       <form class="puzzle-form" onsubmit="verifyKey(event)">
-        <label for="user-input" class="form-label">Admin Key:</label>
-        <input type="text" id="user-input" class="form-input" required>
-        <button type="submit" class="submit-button">Authenticate</button>
+        <label for="user-input" class="form-label">Input Access Key:</label><br><br>
+        <input type="text" id="user-input" class="form-input" placeholder="CTF{...}" required>
+        <button type="submit" class="submit-button">Request Authentication</button>
       </form>
     </section>
   </main>
 
   <script>
+    // The target flag hidden as character codes (ASCII values)
+    // The flag hidden here translates exactly to: CTF{c1i3nt_s1d3_byp4ss_w1n}
+    const targetCodes =;
+
     function verifyKey(event) {
       event.preventDefault();
-      const flag = document.getElementById('user-input').value;
+      const userInput = document.getElementById('user-input').value;
       
-      // Simple character-code check split up to prevent raw string searching
-      if (flag.charCodeAt(0) === 67 && flag.charCodeAt(1) === 84 && flag.charCodeAt(2) === 70 && 
-          flag.slice(3) === "{bypassing_js_is_easy}") {
-        document.getElementById('status-light').innerText = "[ STATUS: GRANTED ]";
-        document.getElementById('status-light').style.color = "green";
-        alert("Success! You found the flag.");
-      } else {
-        alert("Access Denied.");
+      // Check length first
+      if (userInput.length !== targetCodes.length) {
+        failAuth();
+        return;
       }
+
+      // Check character codes one by one
+      for (let i = 0; i < userInput.length; i++) {
+        if (userInput.charCodeAt(i) !== targetCodes[i]) {
+          failAuth();
+          return;
+        }
+      }
+
+      // If all checks pass
+      grantAuth();
+    }
+
+    function failAuth() {
+      alert("Invalid Security Key Matrix. Intruder alert triggered.");
+    }
+
+    function grantAuth() {
+      const statusBox = document.getElementById('status-light');
+      statusBox.innerText = "[ STATUS: ACCESS_GRANTED ]";
+      statusBox.style.color = "#56d364";
+      statusBox.style.backgroundColor = "#1f6feb";
+      alert("Success! Access token compiled. Flag is your input key.");
     }
   </script>
+
+</body>
+</html>
