@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Secure Admin Override Portal</title>
   <style>
-    /* Quick terminal style to make it look authentic */
+
     body { background-color: #0d1117; color: #58a6ff; font-family: monospace; padding: 50px; }
     .content-box { border: 1px solid #30363d; padding: 20px; border-radius: 6px; background-color: #161b22; max-width: 500px; margin: 0 auto; }
     h1 { color: #f0f6fc; border-bottom: 1px solid #30363d; padding-bottom: 10px; }
@@ -35,21 +35,18 @@
   </main>
 
   <script>
-    // The target flag hidden as character codes (ASCII values)
-    // The flag hidden here translates exactly to: CTF{c1i3nt_s1d3_byp4ss_w1n}
+
     const targetCodes = [67, 84, 70, 123, 99, 49, 105, 51, 110, 116, 95, 115, 49, 100, 51, 95, 98, 121, 112, 52, 115, 115, 95, 119, 49, 110, 125];
 
     function verifyKey(event) {
       event.preventDefault();
       const userInput = document.getElementById('user-input').value;
       
-      // Check length first
       if (userInput.length !== targetCodes.length) {
         failAuth();
         return;
       }
 
-      // Check character codes one by one
       for (let i = 0; i < userInput.length; i++) {
         if (userInput.charCodeAt(i) !== targetCodes[i]) {
           failAuth();
@@ -57,7 +54,6 @@
         }
       }
 
-      // If all checks pass
       grantAuth();
     }
 
