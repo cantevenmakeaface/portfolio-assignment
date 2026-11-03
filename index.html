@@ -1,94 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <style>
-        /* Paste your exact CSS here */
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-
-        body {
-          font-family: 'Courier New', Courier, monospace;
-          background-color: #0d1117;
-          color: #58a6ff;
-          line-height: 1.6;
-        }
-
-        .main-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 2rem;
-          background-color: #161b22;
-          border-bottom: 2px solid #21262d;
-          min-height: 60px;
-        }
-
-        .page-container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          min-height: calc(100vh - 120px);
-          padding: 2rem;
-        }
-
-        .content-box {
-          background-color: #161b22;
-          border: 1px solid #30363d;
-          border-radius: 6px;
-          padding: 2rem;
-          max-width: 600px;
-          width: 100%;
-        }
-
-        .page-title {
-          color: #f0f6fc;
-          font-size: 1.75rem;
-          margin-bottom: 1rem;
-        }
-
-        .page-text {
-          color: #8b949e;
-          margin-bottom: 1.5rem;
-        }
-
-        .nav-button {
-          display: inline-block;
-          background-color: #23c55e;
-          color: #0d1117;
-          text-decoration: none;
-          padding: 0.75rem 1.5rem;
-          border-radius: 4px;
-          font-weight: bold;
-          text-align: center;
-        }
-
-        .nav-button:hover {
-          background-color: #2ea043;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">DevPortfolio</div>
+      <ul class="nav-links">
+        <li><a href="puzzle.html">CTF puzzle</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <header class="main-header">
-        <div class="header-left">orionongkowidjojo2@gmail.com</div>
-        <div class="header-right">+62 859-6020-3887</div>
-    </header>
 
-    <main class="page-container">
-        <section class="content-box">
-            <h1 class="page-title">Orion Rains Ongkowidjojo</h1>
-            <p class="page-text">Nama saya Orion Rains Ongkowidjojo, saya adalah Cybersecurity Engineer yang ahli dalam pembuatan sistem keamanan digital. Saya memiliki sertifikat ISC2, CompTia Security+, dan Google Cybersecurity Certificate. Saya juga sering ikut lomba CTF agar memperkuat kemampuanku.</p>
-            <div class="action-area">
-                <a href="puzzle.html" class="nav-button">Trial CTF</a>
-            </div>
-        </section>
-    </main>
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1>Nama Saya <span class="highlight">Orion/span></h1>
+      <p>Nama saya Orion Rains Ongkowidjojo, saya adalah Cybersecurity Engineer yang ahli dalam pembuatan sistem keamanan digital. Saya memiliki sertifikat ISC2, CompTia Security+, dan Google Cybersecurity Certificate. Saya juga sering ikut lomba CTF agar memperkuat kemampuanku.</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn primary">View Work</a>
+        <a href="#contact" class="btn secondary">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Email: orionongkowidjojo2@gmail.com</p>
+    <p>Telp: +62 859-6020-3987</p>
+  </section>
+
 
 </body>
 </html>
