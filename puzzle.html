@@ -1,38 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <header class="main-header">
-    <div class="header-left"></div>
-    <div class="header-right"></div>
-  </header>
-
   <main class="page-container">
     <section class="content-box">
-      <h1 class="page-title"></h1>
-      <p class="page-text"></p>
+      <h1 class="page-title">Secure Portal v1.0</h1>
+      <p class="page-text">Only administrators with the valid override key can bypass this gateway.</p>
 
       <div class="puzzle-area">
-        <!-- Add your challenge elements or terminals here -->
+        <div id="status-light" style="color: red; font-weight: bold;">[ STATUS: LOCKED ]</div>
       </div>
 
-      <form class="puzzle-form">
-        <label for="user-input" class="form-label"></label>
+      <form class="puzzle-form" onsubmit="verifyKey(event)">
+        <label for="user-input" class="form-label">Admin Key:</label>
         <input type="text" id="user-input" class="form-input" required>
-        <button type="submit" class="submit-button"></button>
+        <button type="submit" class="submit-button">Authenticate</button>
       </form>
     </section>
   </main>
 
-  <footer class="main-footer">
-    <p></p>
-  </footer>
-
-</body>
-</html>
+  <script>
+    function verifyKey(event) {
+      event.preventDefault();
+      const flag = document.getElementById('user-input').value;
+      
+      // Simple character-code check split up to prevent raw string searching
+      if (flag.charCodeAt(0) === 67 && flag.charCodeAt(1) === 84 && flag.charCodeAt(2) === 70 && 
+          flag.slice(3) === "{bypassing_js_is_easy}") {
+        document.getElementById('status-light').innerText = "[ STATUS: GRANTED ]";
+        document.getElementById('status-light').style.color = "green";
+        alert("Success! You found the flag.");
+      } else {
+        alert("Access Denied.");
+      }
+    }
+  </script>
